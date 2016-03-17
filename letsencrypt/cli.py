@@ -574,11 +574,13 @@ def cli_plugin_requests(config):
         req_auth = set_configurator(req_auth, "webroot")
     if config.manual:
         req_auth = set_configurator(req_auth, "manual")
+    if config.dns:
+        req_auth = set_configurator(req_auth, "dns")
     logger.debug("Requested authenticator %s and installer %s", req_auth, req_inst)
     return req_auth, req_inst
 
 
-noninstaller_plugins = ["webroot", "manual", "standalone"]
+noninstaller_plugins = ["dns", "webroot", "manual", "standalone"]
 
 
 def choose_configurator_plugins(config, plugins, verb):
@@ -1735,6 +1737,8 @@ def _plugins_parsing(helpful, plugins):
                 help='Obtain certs using a "standalone" webserver.')
     helpful.add("plugins", "--manual", action="store_true",
                 help='Provide laborious manual instructions for obtaining a cert')
+    helpful.add("plugins", "--dns", action="store_true",
+                help='Provide laborious manual DNS instructions for obtaining a cert')
     helpful.add("plugins", "--webroot", action="store_true",
                 help='Obtain certs by placing files in a webroot directory.')
 

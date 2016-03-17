@@ -39,6 +39,7 @@ install_requires = [
     'ConfigArgParse>=0.9.3',
     'configobj',
     'cryptography>=0.7',  # load_pem_x509_certificate
+    'dnspython',
     'parsedatetime',
     'psutil>=2.1.0',  # net_connections introduced in 2.1.0
     'PyOpenSSL',
@@ -47,6 +48,7 @@ install_requires = [
     'pytz',
     'setuptools',  # pkg_resources
     'six',
+    'tldextract',
     'zope.component',
     'zope.interface',
 ]
@@ -128,6 +130,7 @@ setup(
             'letsencrypt = letsencrypt.cli:main',
         ],
         'letsencrypt.plugins': [
+            'dns = letsencrypt.plugins.dns:Authenticator',
             'manual = letsencrypt.plugins.manual:Authenticator',
             'null = letsencrypt.plugins.null:Installer',
             'standalone = letsencrypt.plugins.standalone:Authenticator',
